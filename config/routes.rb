@@ -4,4 +4,7 @@ Rails.application.routes.draw do
     resources :books
   end
   resources :authors
+
+  root 'static_pages#home'
+
 end
