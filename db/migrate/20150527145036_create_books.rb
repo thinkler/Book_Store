@@ -7,6 +7,9 @@ class CreateBooks < ActiveRecord::Migration
       t.integer :year
       t.string  :isnb
       t.text    :about
+
+      t.references :category, index: true
+
       t.timestamps null: false
     end
   end
