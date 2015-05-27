@@ -18,9 +18,10 @@
           %ul
             %li
               %h3
-                = cat.title
-                = link_to "x", category_path(cat), method: :delete, class: "btn btn-danger"
-                = link_to "Edit", edit_category_path(cat), class: "btn btn-info"
+                = link_to "#{cat.title}", cat
+                .btn-group
+                  = link_to "x", category_path(cat), method: :delete, class: "btn btn-danger", data: { confirm: "Are u sure?" }
+                  = link_to "Edit", edit_category_path(cat), class: "btn btn-info"
 
       .data
         = yield          

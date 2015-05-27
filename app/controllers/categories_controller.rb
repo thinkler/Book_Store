@@ -1,12 +1,13 @@
 class CategoriesController < ApplicationController
 
-  before_action :find_category, only: [:show, :edit, :update, :destroy]
+  before_action :find_category, except: [:new, :index, :create]
 
   def index
     @categories = Category.all
   end
 
   def show
+    @books = @category.books.all
   end
 
   def new
