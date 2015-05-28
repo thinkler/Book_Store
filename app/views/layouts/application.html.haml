@@ -9,11 +9,10 @@
   %body
     .container
       .col-md-3.categories
-        %h2 Categories
+        %h2 
+          Categories:
+          = link_to "New +", new_category_path, class: "btn btn-default"
         - @categories = Category.all
-        = link_to "New +", new_category_path, class: "btn btn-default"
-        %br 
-        %br
         - @categories.each do |cat|
           %ul
             %li

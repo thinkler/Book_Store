@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @books = @category.books.all
+    @books = @category.books.all.paginate(page: params[:page], per_page: 10)
   end
 
   def new

@@ -20,7 +20,9 @@
 .categories {
   margin-top: 30px;
   border-right: 1px solid black;
+  border-bottom: 1px solid black;
 }
+
 
 .data {
   margin-top: 30px;
@@ -28,4 +30,22 @@
 
 .form {
 
+}
+
+.book-data {
+  .title {
+    a {
+      color: blue;
+    }
+  }
+  .image {
+    float: left;
+    margin: 10px 10px 10px 0; /* Отступы вокруг картинки */
+  }
+  .config-btns {
+    float: right;
+  }
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 70px;
 }

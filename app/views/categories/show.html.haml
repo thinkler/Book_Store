@@ -2,14 +2,27 @@
   %h1
     Category: 
     = @category.title
-
-  = link_to "New +", new_category_book_path(@category), class: "btn btn-default"
-  %ul
-    %h3 Books:
-    - @books.each do |b|
-      %li
-        = link_to "#{b.title}", category_book_path(@category, b)
-        .btn-group
-          = link_to "x", category_book_path(@category, b), method: :delete, class: "btn btn-danger"
-          = link_to "Edit", edit_category_book_path(@category, b), class: "btn btn-info"
-
+  %h3 
+    Books:
+    = link_to "New +", new_category_book_path(@category), class: "btn btn-default"
+  = will_paginate @books
+  - @books.each do |b|
+    .book-data
+      .title
+        =link_to "#{b.title}", category_book_path(@category, b)  
+      .btn-group.config-btns
+        = link_to "x", category_book_path(@category, b), method: :delete, class: "btn btn-danger"
+        = link_to "Edit", edit_category_book_path(@category, b), class: "btn btn-info"    
+      .authors
+        Some, Some, Some
+        .year
+          Publication year:
+          = b.year
+      .image
+        = image_tag "http://www.bookzone.com.ua/images2/47465.jpg", size: "150x200"  
+      .about  
+        %p= b.short_about
+        = @short
+      .buy-btn  
+        = link_to "BUY ME", root_path, class: "btn btn-primary"
+     

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527151707) do
+ActiveRecord::Schema.define(version: 20150528160626) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 20150527151707) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "authors_books", id: false, force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "author_id"
+  end
+
+  add_index "authors_books", ["author_id"], name: "index_authors_books_on_author_id"
+  add_index "authors_books", ["book_id"], name: "index_authors_books_on_book_id"
+
   create_table "books", force: :cascade do |t|
     t.string   "title"
     t.float    "price"
@@ -48,17 +56,10 @@ ActiveRecord::Schema.define(version: 20150527151707) do
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.text     "short_about"
   end
 
   add_index "books", ["category_id"], name: "index_books_on_category_id"
-
-  create_table "books_authors", id: false, force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "author_id"
-  end
-
-  add_index "books_authors", ["author_id"], name: "index_books_authors_on_author_id"
-  add_index "books_authors", ["book_id"], name: "index_books_authors_on_book_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "title"
