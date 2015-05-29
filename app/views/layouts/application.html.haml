@@ -13,7 +13,8 @@
           %h2=link_to "Authors", authors_path
           %h2 
             Categories:
-            = link_to "New +", new_category_path, class: "btn btn-default"
+            - if admin_signed_in?
+              = link_to "New +", new_category_path, class: "btn btn-default"
           - @categories = Category.all
           - @categories.each do |cat|
             %ul
@@ -24,9 +25,19 @@
                     .btn-group
                       = link_to "x", category_path(cat), method: :delete, class: "btn btn-danger", data: { confirm: "Are u sure?" }
                       = link_to "Edit", edit_category_path(cat), class: "btn btn-info"  
-          - if admin_signed_in?                    
-            = link_to "Log out", destroy_admin_session_path, method: :delete
+          %hr            
+          - if admin_signed_in?
+            = link_to image_tag("http://printreranduri.eu/wp-content/uploads/OUT_High.jpg", :width => 100, :height => 40), destroy_admin_session_path, method: :delete
           - else
-            = link_to "Admin in", new_admin_session_path  
-      .data.col-md-offset-3
+            = link_to image_tag("http://keithcraft.org/wp-content/uploads/2015/02/KijdLzeiq.jpeg", :width => 100, :height => 40), new_admin_session_path            
+      .data.col-md-offset-3  
+        .search-field
+          = form_tag do 
+            .col-sm-7
+              = text_field_tag :search, "", class: "form-control col-sm-4", witdth: 20
+            = submit_tag "Search", class: "btn btn-default"    
         = yield          
+        .cart.col-md-offset-5
+          = link_to image_tag("https://www.ugvermont.com/sites/default/files/imagepicker/1/cart-full_0.png", width: 100, height: 100), "", class: "btn btn-default pic"
+          CART INFO    
+

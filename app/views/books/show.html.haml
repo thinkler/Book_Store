@@ -6,15 +6,29 @@
     .image
       = image_tag "http://www.bookzone.com.ua/images2/47465.jpg"
     .info
+      %b Year:
+      = @book.year
+      %br
+      %b Count:
+      = @book.count
+      %br
+      %b ISBN:
+      = @book.isnb    
+      %br
       %b Authors:
       - if admin_signed_in?
         = form_tag author_search_list_path, :method => "get" do
           = text_field_tag :author_name
           = hidden_field_tag :book_id, @book.id
           = submit_tag "Add", class: "btn btn-primary"
-        - @authors.each do |a|
-          = link_to "#{a.name}", author_path(a.id)  
-
+      - @authors.each do |a|
+        = link_to "#{a.name}", author_path(a.id)    
+      %h3
+        Price:
+        = @book.price 
+      .buy-btn  
+        = link_to "BUY ME", root_path, class: "btn btn-primary" 
+           
   .container.col-md-8
     .about
       %h3 Description

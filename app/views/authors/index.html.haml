@@ -1,7 +1,8 @@
 .container.col-md-9.author-index
   %h1 
     Authors:
-    = link_to "New +", new_author_path, class: "btn btn-default"
+    - if admin_signed_in?
+      = link_to "New +", new_author_path, class: "btn btn-default"
   - @authors.each do |a|
     .col-md-4.single
       .name
