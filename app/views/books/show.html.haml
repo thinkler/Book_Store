@@ -1,12 +1,13 @@
-.col-md-8
-  %h1= @book.title
-  = link_to '<- Back', :back 
-  .book
-    .container
-      .image
-        = image_tag "http://www.bookzone.com.ua/images2/47465.jpg"
-      .info
-        %b Authors:
+
+%h1= @book.title
+= link_to '<- Back', :back 
+.book
+  .container.col-md-8
+    .image
+      = image_tag "http://www.bookzone.com.ua/images2/47465.jpg"
+    .info
+      %b Authors:
+      - if admin_signed_in?
         = form_tag author_search_list_path, :method => "get" do
           = text_field_tag :author_name
           = hidden_field_tag :book_id, @book.id
@@ -14,7 +15,7 @@
         - @authors.each do |a|
           = link_to "#{a.name}", author_path(a.id)  
 
-    .conrainer
-      .about
-        %h3 Description
-        %p= @book.about    
+  .container.col-md-8
+    .about
+      %h3 Description
+      %p= @book.about    

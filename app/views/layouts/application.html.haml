@@ -20,8 +20,13 @@
               %li
                 %h3
                   = link_to "#{cat.title}", cat
-                  .btn-group
-                    = link_to "x", category_path(cat), method: :delete, class: "btn btn-danger", data: { confirm: "Are u sure?" }
-                    = link_to "Edit", edit_category_path(cat), class: "btn btn-info"  
+                  - if admin_signed_in?
+                    .btn-group
+                      = link_to "x", category_path(cat), method: :delete, class: "btn btn-danger", data: { confirm: "Are u sure?" }
+                      = link_to "Edit", edit_category_path(cat), class: "btn btn-info"  
+          - if admin_signed_in?                    
+            = link_to "Log out", destroy_admin_session_path, method: :delete
+          - else
+            = link_to "Admin in", new_admin_session_path  
       .data.col-md-offset-3
         = yield          

@@ -10,9 +10,10 @@
     .book-index.container.col-md-12
       .title
         =link_to "#{b.title}", category_book_path(@category, b)  
-      .btn-group.config-btns
-        = link_to "x", category_book_path(@category, b), method: :delete, class: "btn btn-danger"
-        = link_to "Edit", edit_category_book_path(@category, b), class: "btn btn-info"    
+      - if admin_signed_in?
+        .btn-group.config-btns
+          = link_to "x", category_book_path(@category, b), method: :delete, class: "btn btn-danger"
+          = link_to "Edit", edit_category_book_path(@category, b), class: "btn btn-info"    
       .authors
         Some, Some, Some
         .year

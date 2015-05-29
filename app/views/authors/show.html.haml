@@ -7,13 +7,15 @@
     .about  
       %p=@author.about  
   %h3 Books:
-  = form_tag book_search_list_path, :method => "get" do
-    = text_field_tag :book_title
-    = hidden_field_tag :author_id, @author.id
-    = submit_tag "Add", class: "btn btn-primary"
+  - if admin_signed_in?
+    = form_tag book_search_list_path, :method => "get" do
+      = text_field_tag :book_title
+      = hidden_field_tag :author_id, @author.id
+      = submit_tag "Add", class: "btn btn-primary"
   %ul
     - if @books
       - @books.each do |b|
         %li
-          = link_to "x", {:controller => "authors", :action => "delete_book", :book_id => b.id}, method: :delete, class: "btn btn-danger btn-xs"
+          - if admin_signed_in?
+            = link_to "x", {:controller => "authors", :action => "delete_book", :book_id => b.id}, method: :delete, class: "btn btn-danger btn-xs"
           = link_to "#{b.title}", category_book_path(b.category.id, b.id)
