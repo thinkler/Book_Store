@@ -8,19 +8,20 @@
     = csrf_meta_tags
   %body
     .container
-      .col-md-3.categories
-        %h2 
-          Categories:
-          = link_to "New +", new_category_path, class: "btn btn-default"
-        - @categories = Category.all
-        - @categories.each do |cat|
-          %ul
-            %li
-              %h3
-                = link_to "#{cat.title}", cat
-                .btn-group
-                  = link_to "x", category_path(cat), method: :delete, class: "btn btn-danger", data: { confirm: "Are u sure?" }
-                  = link_to "Edit", edit_category_path(cat), class: "btn btn-info"
-
-      .data
+      .col-md-3
+        .menu
+          %h2=link_to "Authors", authors_path
+          %h2 
+            Categories:
+            = link_to "New +", new_category_path, class: "btn btn-default"
+          - @categories = Category.all
+          - @categories.each do |cat|
+            %ul
+              %li
+                %h3
+                  = link_to "#{cat.title}", cat
+                  .btn-group
+                    = link_to "x", category_path(cat), method: :delete, class: "btn btn-danger", data: { confirm: "Are u sure?" }
+                    = link_to "Edit", edit_category_path(cat), class: "btn btn-info"  
+      .data.col-md-offset-3
         = yield          

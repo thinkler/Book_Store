@@ -1,0 +1,14 @@
+- if !@books.empty?
+  %h1 
+    books
+  %table.table.table-hover
+    %tr
+      %th
+        Title
+      %th    
+    - @books.each do |b|
+      %tr
+        %td
+          = link_to "#{b.title}"
+        %td
+          = link_to "Select", {:controller => "authors", :action => "add_book", :id => b.id, :author_id => params[:author_id]}, method: :post

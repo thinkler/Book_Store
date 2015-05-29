@@ -1,0 +1,19 @@
+.col-md-8.author
+  %h1= @author.name
+  = link_to '<- Back', :back 
+  .container.col-md-12
+    .image
+      = image_tag "http://audiobook-online.com/wp-content/uploads/2013/11/17112013-5.jpg", size: "300x400"
+    .about  
+      %p=@author.about  
+  %h3 Books:
+  = form_tag book_search_list_path, :method => "get" do
+    = text_field_tag :book_title
+    = hidden_field_tag :author_id, @author.id
+    = submit_tag "Add", class: "btn btn-primary"
+  %ul
+    - if @books
+      - @books.each do |b|
+        %li
+          = link_to "x", {:controller => "authors", :action => "delete_book", :book_id => b.id}, method: :delete, class: "btn btn-danger btn-xs"
+          = link_to "#{b.title}", category_book_path(b.category.id, b.id)

@@ -1,9 +1,10 @@
 class BooksController < ApplicationController
 
-  before_action :find_category
-  before_action :find_book, except: [:create, :new]
+  before_action :find_category, except: [:author_select_list, :add_author, :delete_author]
+  before_action :find_book, except: [:create, :new, :author_select_list, :add_author, :delete_author]
 
   def show
+    @authors = @book.authors.all
   end
 
   def new
@@ -33,6 +34,27 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     redirect_to @category
+  end
+
+  def author_select_list
+    @authors = Author.ransack(name_cont: params[:author_name]).result
+    @authors = @authors.limit(20)
+  end
+
+  def add_author
+    author_id = params[:id]
+    @book = Book.find(params[:book_id])
+    if @book.authors.where(id: author_id).empty?
+      @book.authors << Author.find(author_id)
+    end
+    redirect_to category_book_path(@book.category.id, @book)
+  end
+
+  def delete_author
+    author_id = params[:author_id]
+    @book = Book.find(params[:id])
+    @book.authors.delete(author_id)
+    redirect_to book_path(params[:id])
   end
 
   private 

@@ -16,11 +16,18 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+.image {
+  float: left;
+  margin: 10px 10px 10px 0;
+}
 
-.categories {
+.menu {
   margin-top: 30px;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
+  position: fixed;
+  z-index: 101;
+  float: right;
 }
 
 
@@ -32,20 +39,35 @@
 
 }
 
-.book-data {
+.book-index {
   .title {
     a {
       color: blue;
     }
-  }
-  .image {
-    float: left;
-    margin: 10px 10px 10px 0; /* Отступы вокруг картинки */
   }
   .config-btns {
     float: right;
   }
   margin-top: 10px;
   margin-left: 20px;
-  margin-bottom: 70px;
+  margin-bottom: 20px;
+}
+
+.author-index {
+  .photo {
+    float: bottom;
+  }
+  .name {
+
+  }
+  .single {
+    
+  }
+  border: 1px solid black;
+}
+
+.author {
+  .about {
+    margin-top: 30px;
+  }
 }

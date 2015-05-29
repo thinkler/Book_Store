@@ -1,0 +1,13 @@
+.container.col-md-9.author-index
+  %h1 
+    Authors:
+    = link_to "New +", new_author_path, class: "btn btn-default"
+  - @authors.each do |a|
+    .col-md-4.single
+      .name
+        = link_to "#{a.name}", a
+      .btn-group.config-btns
+        = link_to "x", author_path(a), method: :delete, class: "btn btn-danger"
+        = link_to "Edit", edit_author_path(a), class: "btn btn-info"        
+      .photo
+        = image_tag "http://audiobook-online.com/wp-content/uploads/2013/11/17112013-5.jpg", size: "150x200"
