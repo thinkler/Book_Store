@@ -11,21 +11,25 @@ class Book < ActiveRecord::Base
   validates :isnb, presence: true, format: { with: ISNB }
   validates :about, presence: true, length: { minimum: 100 }
 
+  has_many :order_book, dependent: :destroy
   has_and_belongs_to_many :authors
   belongs_to :category
 
-  after_save :generate_short_about
+  has_attached_file :book_img, styles: { large: "600x600>", medium: "300x300", thumb: "150x150#" }
+  validates_attachment_content_type :book_img, :content_type => /\Aimage\/.*\Z/
+
+  before_save :generate_short_about
 
   private 
 
   def generate_short_about
     array = self.about.split(".")
     p array
-    short_about = ""
+    mini_about = ""
     for i in 0..2
-      short_about += array[i] + "."
+      mini_about += array[i] + "."
     end
-    update_column(:short_about, short_about)
+    self[:short_about] = mini_about
   end
 
 end

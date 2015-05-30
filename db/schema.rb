@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528160626) do
+ActiveRecord::Schema.define(version: 20150530181759) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -34,8 +34,12 @@ ActiveRecord::Schema.define(version: 20150528160626) do
   create_table "authors", force: :cascade do |t|
     t.string   "name"
     t.text     "about"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "authors_books", id: false, force: :cascade do |t|
@@ -54,17 +58,43 @@ ActiveRecord::Schema.define(version: 20150528160626) do
     t.string   "isnb"
     t.text     "about"
     t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.text     "short_about"
+    t.string   "book_img_file_name"
+    t.string   "book_img_content_type"
+    t.integer  "book_img_file_size"
+    t.datetime "book_img_updated_at"
   end
 
   add_index "books", ["category_id"], name: "index_books_on_category_id"
+
+  create_table "carts", force: :cascade do |t|
+    t.string   "status"
+    t.float    "total_price"
+    t.integer  "book_id"
+    t.integer  "order_books_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "carts", ["book_id"], name: "index_carts_on_book_id"
+  add_index "carts", ["order_books_id"], name: "index_carts_on_order_books_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_books", force: :cascade do |t|
+    t.float    "unit_price"
+    t.float    "sum_price"
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "book_id"
+    t.integer  "cart_id"
   end
 
 end

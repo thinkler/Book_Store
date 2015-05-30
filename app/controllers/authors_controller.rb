@@ -8,6 +8,7 @@ class AuthorsController < ApplicationController
 
   def show
     @books = @author.books.all
+    @books = @books.all.paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -67,7 +68,7 @@ class AuthorsController < ApplicationController
   end
 
   def author_params
-     params.require(:author).permit(:name, :about)
+     params.require(:author).permit(:name, :about, :photo)
   end
 
 end

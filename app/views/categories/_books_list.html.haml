@@ -1,0 +1,28 @@
+.col-md-12
+  - unless books.empty?
+    = will_paginate books
+    - books.each do |b|
+      .book-index.container.col-md-12
+        .title
+          =link_to "#{b.title}", category_book_path(b.category, b)  
+        - if admin_signed_in?
+          .btn-group.config-btns
+            = link_to "x", category_book_path(b.category, b), method: :delete, class: "btn btn-danger"
+            = link_to "Edit", edit_category_book_path(b.category, b), class: "btn btn-info"    
+        .authors
+          - b.authors.each do |a|
+            = a.name
+            ,
+          .year
+            Publication year:
+            = b.year
+        .image
+          = image_tag b.book_img.url(:medium)
+        .about  
+          %p= b.short_about
+        %h3
+          Price:
+          = b.price 
+        .buy-btn  
+  - else
+    %h3 Here are no books  

@@ -5,6 +5,7 @@ class BooksController < ApplicationController
 
   def show
     @authors = @book.authors.all
+    @order_book = current_cart.order_books.new
   end
 
   def new
@@ -60,7 +61,7 @@ class BooksController < ApplicationController
   private 
 
   def book_params
-    params.require(:book).permit(:title, :price, :count, :year, :isnb, :about)
+    params.require(:book).permit(:title, :price, :count, :year, :isnb, :about, :book_img)
   end
 
   def find_book

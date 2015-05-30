@@ -1,4 +1,4 @@
-= bootstrap_form_for [@category, @book] do |f|
+= bootstrap_form_for [@category, @book], html: { multipart: true } do |f|
 
   = f.text_field :title
   = f.text_field :price
@@ -6,5 +6,6 @@
   = f.text_field :year
   = f.text_field :isnb
   = f.text_area :about
+  = f.file_field :book_img 
 
   = f.submit

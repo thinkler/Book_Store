@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 
-  before_action :find_category, except: [:new, :index, :create]
+  before_action :find_category, except: [:new, :index, :create, :search]
 
   def index
     @categories = Category.all
@@ -8,6 +8,7 @@ class CategoriesController < ApplicationController
 
   def show
     @books = @category.books.all.paginate(page: params[:page], per_page: 10)
+    #@order_book = current_cart.order_books.new
   end
 
   def new
@@ -37,6 +38,11 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     redirect_to root_path
+  end
+
+  def search
+    @books = Book.ransack(title_cont: params[:title]).result
+    @books = @books.all.paginate(page: params[:page], per_page: 10)
   end
 
   private 

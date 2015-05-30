@@ -1,10 +1,9 @@
 
 %h1= @book.title
-= link_to '<- Back', :back 
-.book
+.book.book-index
   .container.col-md-8
     .image
-      = image_tag "http://www.bookzone.com.ua/images2/47465.jpg"
+      = image_tag @book.book_img.url(:medium)
     .info
       %b Year:
       = @book.year
@@ -27,7 +26,12 @@
         Price:
         = @book.price 
       .buy-btn  
-        = link_to "BUY ME", root_path, class: "btn btn-primary" 
+        = form_for @order_book do |f| 
+          .input-group
+            = f.hidden_field :quantity, value: 1
+            = f.hidden_field :book_id, value: @book.id 
+            = f.submit "Add to Cart", class: "btn btn-primary" 
+            
            
   .container.col-md-8
     .about

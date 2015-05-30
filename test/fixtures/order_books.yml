@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unit_price: 
+  sum_price: 
+  quantity: 1
+
+two:
+  unit_price: 
+  sum_price: 
+  quantity: 1

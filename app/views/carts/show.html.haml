@@ -1,0 +1,19 @@
+.col-md-6.cart-data
+  - @books.each do |b|
+    .container
+      .col-md-2
+        .title
+          = b.book.title
+        = link_to "Remove", order_book_path(b), method: :delete
+      .col-md-2
+        = form_tag order_book_path, method: :patch do 
+          = hidden_field_tag :b_id, b.id
+          = number_field_tag :quantity, b.quantity.to_i, class: "form-control count", min: 1
+          = submit_tag "Update quantity"
+  
+  %br
+  = link_to "Send request", "", class: "btn btn-default"
+
+  %h3 
+    Total price: 
+    = @cart.total_price

@@ -16,6 +16,20 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+td {
+  text-align: center;
+}
+
+.title {
+  font-size: 20pt;
+}
+
+.cart-data {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
 .image {
   float: left;
   margin: 10px 10px 10px 0;
