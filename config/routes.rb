@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
   resources :authors
   resources :order_books, only: [:create, :update, :destroy]
-  resources :carts, only: [:show]
+  resources :carts
   
   root 'static_pages#home'
 
