@@ -24,5 +24,11 @@
           Price:
           = b.price 
         .buy-btn  
+          - unless admin_signed_in?
+            = form_for order_book do |f| 
+              .input-group
+                = f.hidden_field :quantity, value: 1
+                = f.hidden_field :book_id, value: b.id 
+                = f.submit "Add to Cart", class: "btn btn-primary" 
   - else
     %h3 Here are no books  

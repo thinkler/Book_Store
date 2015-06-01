@@ -1,9 +1,13 @@
 class CartsController < ApplicationController
   def show
-    @cart = current_cart
-    @cart.subtotal
-    @cart.save
-    @books = current_cart.order_books
+    if !admin_signed_in?
+      @cart = current_cart
+      @cart.subtotal
+      @cart.save
+    else
+      @cart = Cart.find(params[:id])
+    end
+    @books = @cart.order_books
   end
 
   def index
@@ -15,15 +19,28 @@ class CartsController < ApplicationController
   end
 
   def update
-    @cart = current_cart
-    @cart.update(cart_params)
-    session.clear
-    redirect_to root_path
+    unless params[:cart][:status]
+      @cart = current_cart
+      @cart.update(cart_params)
+      redirect_to root_path
+      session.clear
+    else
+      @cart = Cart.find(params[:id])
+      @cart.update(cart_params)
+      redirect_to carts_path
+    end
+
+  end
+
+  def destroy
+    @cart = Cart.find(params[:id])
+    @cart.destroy
+    redirect_to carts_path
   end
 
   private 
 
   def cart_params
-    params.require(:cart).permit(:name, :phone, :adress)
+    params.require(:cart).permit(:name, :phone, :adress, :status)
   end
 end

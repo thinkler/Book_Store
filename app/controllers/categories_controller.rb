@@ -7,8 +7,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @books = @category.books.all.paginate(page: params[:page], per_page: 10)
-    #@order_book = current_cart.order_books.new
+    @books = @category.books.all.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+    @order_book = current_cart.order_books.new
   end
 
   def new

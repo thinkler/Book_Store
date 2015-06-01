@@ -4,15 +4,25 @@
       .col-md-2
         .title
           = b.book.title
-        = link_to "Remove", order_book_path(b), method: :delete
+        - if !admin_signed_in?
+          = link_to "Remove", order_book_path(b), method: :delete
       .col-md-2
-        = form_tag order_book_path, method: :patch do 
-          = hidden_field_tag :b_id, b.id
-          = number_field_tag :quantity, b.quantity.to_i, class: "form-control count", min: 1
-          = submit_tag "Update quantity"
+        - if !admin_signed_in?
+          = form_tag order_book_path, method: :patch do 
+            = hidden_field_tag :b_id, b.id
+            = number_field_tag :quantity, b.quantity.to_i, class: "form-control count", min: 1
+            = submit_tag "Update quantity"
+        - else
+
   
   %br
-  = link_to "Send request", edit_cart_path(@cart), class: "btn btn-default"
+  - if !admin_signed_in?
+    = link_to "Send request", edit_cart_path(@cart), class: "btn btn-default"
+  -else
+    %h3 Info
+    = @cart.name
+    = @cart.phone
+    = @cart.adress
 
   %h3 
     Total price: 

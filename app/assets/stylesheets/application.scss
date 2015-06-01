@@ -16,12 +16,26 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
-td {
-  text-align: center;
-}
-
 .title {
   font-size: 20pt;
+}
+
+
+table {
+  th {
+    text-align: center;
+  }
+}
+
+td {
+    text-align: center;
+    vertical-align:middle;
+  }
+
+.carts {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 .cart-data {
