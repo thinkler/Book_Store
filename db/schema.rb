@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530182656) do
+ActiveRecord::Schema.define(version: 20150602222341) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -58,13 +58,14 @@ ActiveRecord::Schema.define(version: 20150530182656) do
     t.string   "isnb"
     t.text     "about"
     t.integer  "category_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.text     "short_about"
     t.string   "book_img_file_name"
     t.string   "book_img_content_type"
     t.integer  "book_img_file_size"
     t.datetime "book_img_updated_at"
+    t.integer  "rating",                default: 0
   end
 
   add_index "books", ["category_id"], name: "index_books_on_category_id"

@@ -20,6 +20,11 @@ class Book < ActiveRecord::Base
 
   before_save :generate_short_about
 
+  def plus_rating
+    self[:rating] += 1
+    self.save
+  end
+
   private 
 
   def generate_short_about

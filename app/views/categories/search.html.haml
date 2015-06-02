@@ -1,4 +1,5 @@
 %h3 Search results:
 
 .col-md-9
+  =render "in_categories", categories: @categories, counts: @counts, title: @title
   =render "books_list", books: @books

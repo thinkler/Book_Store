@@ -1,5 +1,12 @@
 .col-md-12
   - unless books.empty?
+    %h3 Books:
+    Sotr:
+    = sort_link(@q, :price)
+    |
+    = sort_link(@q, :created_at)
+    |
+    = sort_link(@q, :rating)
     = will_paginate books
     - books.each do |b|
       .book-index.container.col-md-12

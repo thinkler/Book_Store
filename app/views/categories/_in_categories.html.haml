@@ -1,0 +1,10 @@
+- i = 0
+%h3 In categories:
+- categories.each do |cat|
+  - if counts[i] > 0
+    = link_to "#{cat.title}", search_path(cat_id: cat.id, title: title)
+    (
+    = counts[i]
+    )
+    %br
+  - i += 1  

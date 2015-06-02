@@ -22,6 +22,9 @@ class CartsController < ApplicationController
     unless params[:cart][:status]
       @cart = current_cart
       @cart.update(cart_params)
+      @cart.order_books.each do |ob|
+        ob.book.plus_rating
+      end
       redirect_to root_path
       session.clear
     else

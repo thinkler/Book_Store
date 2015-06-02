@@ -8,4 +8,4 @@
       = link_to "New +", new_category_book_path(@category), class: "btn btn-default"
 
 .col-md-9
-  = render 'books_list', books: @books , order_book: @order_book
+  = render 'books_list', books: @books , order_book: @order_book, q: @q

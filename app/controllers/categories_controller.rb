@@ -7,7 +7,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @books = @category.books.all.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+    @q = @category.books.ransack(params[:q])
+    @books = @q.result.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     @order_book = current_cart.order_books.new
   end
 
@@ -41,8 +42,19 @@ class CategoriesController < ApplicationController
   end
 
   def search
-    @books = Book.ransack(title_cont: params[:title]).result
-    @books = @books.all.paginate(page: params[:page], per_page: 10)
+    unless params[:q]
+      params[:q] = {}
+    end
+    @counts = []
+    @title = params[:title]
+    params[:q][:title_cont] = params[:title]
+    @q = Book.ransack(params[:q])
+    #@books = Book.ransack(title_cont: params[:title], category_id_eq: params[:cat_id]).result
+    @books = @q.result.all.paginate(page: params[:page], per_page: 10)
+    @categories = Category.all
+    @categories.each do |cat|
+      @counts << cat.books.ransack(title_cont: params[:title]).result.count      
+    end
   end
 
   private 
