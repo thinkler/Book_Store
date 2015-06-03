@@ -10,7 +10,7 @@
     = will_paginate books
     - books.each do |b|
       .book-index.container.col-md-12
-        .title
+        .book-title
           =link_to "#{b.title}", category_book_path(b.category, b)  
         - if admin_signed_in?
           .btn-group.config-btns
@@ -32,10 +32,11 @@
           = b.price 
         .buy-btn  
           - unless admin_signed_in?
-            = form_for order_book do |f| 
-              .input-group
-                = f.hidden_field :quantity, value: 1
-                = f.hidden_field :book_id, value: b.id 
-                = f.submit "Add to Cart", class: "btn btn-primary" 
+            - if b.count > 0
+              = form_for order_book do |f| 
+                .input-group
+                  = f.hidden_field :quantity, value: 1
+                  = f.hidden_field :book_id, value: b.id 
+                  = f.submit "Add to Cart", class: "btn btn-primary" 
   - else
     %h3 Here are no books  

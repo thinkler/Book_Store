@@ -26,11 +26,12 @@
         = @book.price 
       .buy-btn  
         - unless admin_signed_in?
-          = form_for @order_book do |f| 
-            .input-group
-              = f.hidden_field :quantity, value: 1
-              = f.hidden_field :book_id, value: @book.id 
-              = f.submit "Add to Cart", class: "btn btn-primary" 
+          - if @book.count > 0
+            = form_for @order_book do |f| 
+              .input-group
+                = f.hidden_field :quantity, value: 1
+                = f.hidden_field :book_id, value: @book.id 
+                = f.submit "Add to Cart", class: "btn btn-primary" 
             
            
   .container.col-md-8

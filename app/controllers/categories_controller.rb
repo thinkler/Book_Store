@@ -2,6 +2,7 @@ class CategoriesController < ApplicationController
 
   before_action :find_category, except: [:new, :index, :create, :search]
 
+  before_action :check_admin, except: [:show, :search]
 
   add_breadcrumb "Home", :root_path
 
@@ -24,7 +25,9 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     if @category.save
       redirect_to root_path
+      flash[:success] = "Created"
     else
+      flash[:error] = "Validations error"
       render 'new'
     end
   end
@@ -34,14 +37,17 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
+      flash[:success] = "Updated"
       redirect_to root_path
     else
+      flash[:error] = "Validations error"
       render 'edit'
     end
   end
 
   def destroy
     @category.destroy
+    flash[:success] = "Deleted"
     redirect_to root_path
   end
 
@@ -60,6 +66,7 @@ class CategoriesController < ApplicationController
     @categories.each do |cat|
       @counts << cat.books.ransack(title_cont: params[:title]).result.count      
     end
+    @order_book = current_cart.order_books.new
   end
 
   private 

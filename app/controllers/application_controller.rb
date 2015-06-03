@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_admin
+    unless admin_signed_in?
+      flash[:error] = "Perimit denied"
+      redirect_to root_path
+    end
+  end
+
+
 end

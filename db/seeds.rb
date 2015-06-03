@@ -11,6 +11,6 @@ ABOUT = "At vero eos et accusamus et iusto odio dignissimos ducimus, qui blandit
 Category.create! id:1, title: "New Category"
 
 Book.create! id: 1, title: "Book1", price: 20.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: 1
-Book.create! id: 2, title: "Book2", price: 20.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: 1
-Book.create! id: 3, title: "Book3", price: 20.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: 1
+Book.create! id: 2, title: "Book2", price: 40.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: 1
+Book.create! id: 3, title: "Book3", price: 60.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: 1
 

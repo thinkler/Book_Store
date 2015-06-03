@@ -41,13 +41,20 @@
             .col-sm-7
               = text_field_tag :title, "", class: "form-control col-sm-4", witdth: 20
             = submit_tag "Search", class: "btn btn-default"    
-        .cart.col-md-offset-5
+        .cart.col-md-offset-7
           - unless admin_signed_in?
             - if session[:cart_id]
               = link_to image_tag("https://www.ugvermont.com/sites/default/files/imagepicker/1/cart-full_0.png", width: 100, height: 100), cart_path(session[:cart_id]), class: "btn btn-default pic"
         .col-md-12      
           %br
-          = render_breadcrumbs
+          .col-md-3
+            = render_breadcrumbs
+          .col-md-7  
+            .alert
+              .alert-success
+                = flash[:success]
+              .alert-danger
+                = flash[:error]
         = yield          
          
 

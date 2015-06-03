@@ -3,6 +3,8 @@ class BooksController < ApplicationController
   before_action :find_category, except: [:author_select_list, :add_author, :delete_author]
   before_action :find_book, except: [:create, :new, :author_select_list, :add_author, :delete_author]
 
+  before_action :check_admin, except: [:show]
+
   add_breadcrumb "Home", :root_path
   
   def show
@@ -19,8 +21,10 @@ class BooksController < ApplicationController
   def create
     @book = @category.books.new(book_params)
     if @book.save
+      flash[:success] = "Created"
       redirect_to @category
     else
+      flash[:error] = "Validations error"
       render 'new'
     end
   end
@@ -30,18 +34,22 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
+      flash[:success] = "Updated"
       redirect_to @category
     else
+      flash[:error] = "Validations error"
       render 'edit'
     end
   end
 
   def destroy
     @book.destroy
+    flash[:success] = "Deleted"
     redirect_to @category
   end
 
   def author_select_list
+    add_breadcrumb "Select list"
     @authors = Author.ransack(name_cont: params[:author_name]).result
     @authors = @authors.limit(20)
   end
@@ -52,6 +60,7 @@ class BooksController < ApplicationController
     if @book.authors.where(id: author_id).empty?
       @book.authors << Author.find(author_id)
     end
+    flash[:success] = "Author added"
     redirect_to category_book_path(@book.category.id, @book)
   end
 
@@ -59,6 +68,7 @@ class BooksController < ApplicationController
     author_id = params[:author_id]
     @book = Book.find(params[:id])
     @book.authors.delete(author_id)
+    flash[:success] = "Author deleted"
     redirect_to book_path(params[:id])
   end
 

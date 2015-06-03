@@ -1,7 +1,8 @@
 class OrderBooksController < ApplicationController
   def create
     @cart = current_cart
-    if @cart.order_books.where(book_id: params[:order_book][:book_id].to_i).empty?
+    book_id = params[:order_book][:book_id].to_i
+    if @cart.order_books.where(book_id: book_id).empty?
       @order_book = @cart.order_books.new(order_books_params)
       @cart.save(validate: false)
       p @cart
@@ -13,8 +14,12 @@ class OrderBooksController < ApplicationController
   def update
     @cart = current_cart
     @order_book = @cart.order_books.find(params[:b_id])
-    @order_book.update(quantity: params[:quantity])
-    @order_book.save
+    if params[:quantity].to_i <=  @order_book.book.count
+      @order_book.update(quantity: params[:quantity])
+      @order_book.save
+    else
+      flash[:error] = "Too many"
+    end
     redirect_to cart_path(@cart)
   end
 

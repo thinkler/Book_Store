@@ -1,9 +1,9 @@
 class Cart < ActiveRecord::Base
   has_many :order_books, dependent: :destroy
 
-  validates :name, presence: true
-  validates :adress, presence: true
-  validates :phone, presence: true, numericality: true
+  #validates :name, presence: true
+  #validates :adress, presence: true
+  #validates :phone, presence: true, numericality: true
   
   #before_save :subtotal
 

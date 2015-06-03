@@ -2,7 +2,7 @@ class CreateCarts < ActiveRecord::Migration
   def change
     create_table :carts do |t|
       t.string :status
-      t.float :total_price, default: 0
+      t.float :total_price
 
       t.references :book, index: true
       t.references :order_books, index: true

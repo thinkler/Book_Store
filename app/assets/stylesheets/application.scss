@@ -16,8 +16,15 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
- 
+.book-title {
+  font-size: 40px;
+} 
 
+.alert {
+  text-align: center;
+  font-size: 20px;
+}
+  
 
 table {
   th {
