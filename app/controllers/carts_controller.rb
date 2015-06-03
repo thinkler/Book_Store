@@ -1,6 +1,10 @@
 class CartsController < ApplicationController
+
+  add_breadcrumb "Home", :root_path  
+
   def show
     if !admin_signed_in?
+      add_breadcrumb "Cart"
       @cart = current_cart
       @cart.subtotal
       @cart.save
@@ -15,6 +19,7 @@ class CartsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb "Ordering"
     @cart = current_cart
   end
 
@@ -28,11 +33,10 @@ class CartsController < ApplicationController
       redirect_to root_path
       session.clear
     else
-      @cart = Cart.find(params[:id])
+      @cart = Cart.find(params[:id])  
       @cart.update(cart_params)
       redirect_to carts_path
     end
-
   end
 
   def destroy

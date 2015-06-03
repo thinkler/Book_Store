@@ -1,7 +1,6 @@
-
-%h1= @book.title
 .book.book-index
   .container.col-md-8
+    %h1= @book.title
     .image
       = image_tag @book.book_img.url(:medium)
     .info

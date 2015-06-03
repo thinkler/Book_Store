@@ -1,29 +1,39 @@
 .col-md-6.cart-data
-  - @books.each do |b|
-    .container
-      .col-md-2
-        .title
-          = b.book.title
-        - if !admin_signed_in?
-          = link_to "Remove", order_book_path(b), method: :delete
-      .col-md-2
-        - if !admin_signed_in?
-          = form_tag order_book_path, method: :patch do 
-            = hidden_field_tag :b_id, b.id
-            = number_field_tag :quantity, b.quantity.to_i, class: "form-control count", min: 1
-            = submit_tag "Update quantity"
-        - else
+  .col-md-12
+    %table.table.table-hover
+      %tr
+        %th Book
+        %th Count
+        - unless admin_signed_in?
+          %th Options
+      - @books.each do |b|
+        %tr
+          %td= b.book.title
+          %td= b.quantity
+          - unless admin_signed_in?
+            %td 
+              = form_tag order_book_path, method: :patch do 
+                = hidden_field_tag :b_id, b.id
+                = number_field_tag :quantity, b.quantity.to_i, class: "form-control count", min: 1
+                = submit_tag "Update quantity"   
+              = link_to "Remove", order_book_path(b), method: :delete, class: "btn btn-default"  
+ 
+      %br
+      - unless admin_signed_in?
+        = link_to "Send request", edit_cart_path(@cart), class: "btn btn-default"
+        = link_to "Continue shoping", root_path, class: "btn btn-default"
+        
+      -else
+        %h3 Info:
+        Name:
+        = @cart.name
+        %br
+        Phone:
+        = @cart.phone
+        %br
+        Adress:
+        = @cart.adress
 
-  
-  %br
-  - if !admin_signed_in?
-    = link_to "Send request", edit_cart_path(@cart), class: "btn btn-default"
-  -else
-    %h3 Info
-    = @cart.name
-    = @cart.phone
-    = @cart.adress
-
-  %h3 
-    Total price: 
-    = @cart.total_price
+      %h3 
+        Total price: 
+        = @cart.total_price

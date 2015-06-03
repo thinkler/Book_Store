@@ -8,7 +8,9 @@ class AuthorsController < ApplicationController
 
   def show
     @books = @author.books.all
-    @books = @books.all.paginate(page: params[:page], per_page: 10)
+    @q = @books.ransack(params[:q])
+    @books = @q.result.paginate(page: params[:page], per_page: 10)
+    @order_book = current_cart.order_books.new
   end
 
   def new

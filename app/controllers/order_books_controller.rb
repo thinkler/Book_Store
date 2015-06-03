@@ -3,7 +3,8 @@ class OrderBooksController < ApplicationController
     @cart = current_cart
     if @cart.order_books.where(book_id: params[:order_book][:book_id].to_i).empty?
       @order_book = @cart.order_books.new(order_books_params)
-      @cart.save
+      @cart.save(validate: false)
+      p @cart
       session[:cart_id] = @cart.id
     end
     redirect_to cart_path(@cart)

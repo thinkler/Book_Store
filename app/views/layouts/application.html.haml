@@ -45,6 +45,9 @@
           - unless admin_signed_in?
             - if session[:cart_id]
               = link_to image_tag("https://www.ugvermont.com/sites/default/files/imagepicker/1/cart-full_0.png", width: 100, height: 100), cart_path(session[:cart_id]), class: "btn btn-default pic"
+        .col-md-12      
+          %br
+          = render_breadcrumbs
         = yield          
          
 

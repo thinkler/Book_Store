@@ -2,11 +2,15 @@ class CategoriesController < ApplicationController
 
   before_action :find_category, except: [:new, :index, :create, :search]
 
+
+  add_breadcrumb "Home", :root_path
+
   def index
     @categories = Category.all
   end
 
   def show
+    add_breadcrumb "#{@category.title}", :category_path
     @q = @category.books.ransack(params[:q])
     @books = @q.result.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     @order_book = current_cart.order_books.new
@@ -42,6 +46,7 @@ class CategoriesController < ApplicationController
   end
 
   def search
+    add_breadcrumb "Search results"
     unless params[:q]
       params[:q] = {}
     end

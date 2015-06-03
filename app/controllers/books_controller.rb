@@ -3,7 +3,11 @@ class BooksController < ApplicationController
   before_action :find_category, except: [:author_select_list, :add_author, :delete_author]
   before_action :find_book, except: [:create, :new, :author_select_list, :add_author, :delete_author]
 
+  add_breadcrumb "Home", :root_path
+  
   def show
+    add_breadcrumb "#{@category.title}", category_path(@category)
+    add_breadcrumb "#{@book.title}"
     @authors = @book.authors.all
     @order_book = current_cart.order_books.new
   end

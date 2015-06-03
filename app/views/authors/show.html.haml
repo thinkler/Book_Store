@@ -15,4 +15,4 @@
   %ul
   - if @books
     =# link_to "x", {:controller => "authors", :action => "delete_book", :book_id => @book.id}, method: :delete, class: "btn btn-danger btn-xs"
-    = render "categories/books_list", books: @books
+    = render "categories/books_list", books: @books, q: @q, order_book: @order_book

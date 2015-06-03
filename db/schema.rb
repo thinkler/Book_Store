@@ -72,10 +72,10 @@ ActiveRecord::Schema.define(version: 20150602222341) do
 
   create_table "carts", force: :cascade do |t|
     t.string   "status"
-    t.float    "total_price"
+    t.float    "total_price",    default: 0.0
     t.integer  "order_books_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "phone"
     t.string   "adress"
     t.string   "name"
