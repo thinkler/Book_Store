@@ -13,12 +13,17 @@ Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, q
  omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut  et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis
 doloribus asperiores repellat."
 
-Category.create! id:1, title: "New Category"
-Category.create! id:2, title: "New Category"
+Category.create title: "Category1"
+Category.create title: "Category2"
 
-Book.create! id: 1, title: "Book1", price: 20.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: 1
-Book.create! id: 2, title: "Book2", price: 40.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: 1
-Book.create! id: 3, title: "Book3", price: 60.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: 1
+for i in 1..5 do 
+  category_num = rand(2) + 1
+  Book.create title: "Book#{i}", price: 20.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: category_num
+end
 
-Author.create! id: 1, name: "Auth1", about: ABOUT
-Author.create! id: 2, name: "Auth2", about: ABOUT
+for i in 1..5 do 
+  Author.create name: "Author#{i}", about: ABOUT
+end
+
+
+2012  2013  
