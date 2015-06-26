@@ -1,6 +1,6 @@
 .book
   %h1= @book.title
-  .image.col-sm-4
+  .image.col-sm-3
     = image_tag @book.book_img.url(:medium)
   .info.col-sm-4
     %b Year:
@@ -31,6 +31,6 @@
               = f.hidden_field :quantity, value: 1
               = f.hidden_field :book_id, value: @book.id 
               = f.submit "Add to Cart", class: "btn btn-primary btn-lg" 
-  .about.col-sm-4
+  .about.col-sm-5
     %h4.center Description
     %p= @book.about    

@@ -53,20 +53,13 @@ class CategoriesController < ApplicationController
 
   def search
     add_breadcrumb "Search results"
-    unless params[:q]
-      params[:q] = {}
-    end
-    @counts = []
-    @title = params[:title]
-    params[:q][:title_cont] = params[:title]
-    @q = Book.ransack(params[:q])
-    #@books = Book.ransack(title_cont: params[:title], category_id_eq: params[:cat_id]).result
+
+    @q = Book.ransack(title_cont: params[:title], category_title_cont: params[:category])
     @books = @q.result.all.paginate(page: params[:page], per_page: 10)
-    @categories = Category.all
-    @categories.each do |cat|
-      @counts << cat.books.ransack(title_cont: params[:title]).result.count      
-    end
+    @categories = Category.all.map { |c| c.books.ransack(title_cont: params[:title]).result }
+    @title = params[:title]
     @order_book = current_cart.order_books.new
+
   end
 
   private 
