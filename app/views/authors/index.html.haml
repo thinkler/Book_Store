@@ -1,15 +1,14 @@
-.container.col-md-9.author-index
-  %h1 
-    Authors:
+%h1 
+  Authors:
+  - if admin_signed_in?
+    = link_to "New +", new_author_path, class: "btn btn-default"
+- @authors.each do |a|
+  .col-sm-4.author-index
+    .title-index
+      = link_to "#{a.name}", a
     - if admin_signed_in?
-      = link_to "New +", new_author_path, class: "btn btn-default"
-  - @authors.each do |a|
-    .col-md-4.single
-      .name
-        = link_to "#{a.name}", a
-      - if admin_signed_in?
-        .btn-group.config-btns
-          = link_to "x", author_path(a), method: :delete, class: "btn btn-danger"
-          = link_to "Edit", edit_author_path(a), class: "btn btn-info"        
-      .photo
-        = image_tag a.photo.url(:medium)
+      .btn-group.config-btns
+        = link_to "x", author_path(a), method: :delete, class: "btn btn-default btn-xs"
+        = link_to "Edit", edit_author_path(a), class: "btn btn-default btn-xs"        
+    .photo
+      = image_tag a.photo.url(:medium)

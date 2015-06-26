@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
 
   before_action :find_author, except: [:index, :new, :create, :book_select_list, :add_book]
 
-  before_action :check_admin
+  before_action :check_admin, except: [:show]
 
   add_breadcrumb "Home", :root_path  
   add_breadcrumb "Authors", :authors_path  

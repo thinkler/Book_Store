@@ -1,18 +1,18 @@
-.col-md-8.author
+.author
   %h1= @author.name
-  = link_to '<- Back', :back 
-  .container.col-md-12
-    .image
-      = image_tag @author.photo.url(:medium)
-    .about  
-      %p=@author.about  
-  %h3 Books:
-  - if admin_signed_in?
-    = form_tag book_search_list_path, :method => "get" do
-      = text_field_tag :book_title
-      = hidden_field_tag :author_id, @author.id
-      = submit_tag "Add", class: "btn btn-primary"
-  %ul
-  - if @books
-    =# link_to "x", {:controller => "authors", :action => "delete_book", :book_id => @book.id}, method: :delete, class: "btn btn-danger btn-xs"
-    = render "categories/books_list", books: @books, q: @q, order_book: @order_book
+  .image.col-sm-3
+    = image_tag @author.photo.url(:medium)
+  .about.col-sm-8
+    %h3.center About
+    %p=@author.about  
+  .col-sm-12  
+    %h3 Books:
+    - if admin_signed_in?
+      = form_tag book_search_list_path, :method => "get" do
+        = text_field_tag :book_title
+        = hidden_field_tag :author_id, @author.id
+        = submit_tag "Add", class: "btn btn-primary"
+    %ul
+    - if @books
+      =# link_to "x", {:controller => "authors", :action => "delete_book", :book_id => @book.id}, method: :delete, class: "btn btn-danger btn-xs"
+      = render "categories/books_list", books: @books, q: @q, order_book: @order_book

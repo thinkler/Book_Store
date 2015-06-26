@@ -17,6 +17,12 @@
             = text_field_tag :title, "", class: "form-control col-sm-4", witdth: 20
           .col-sm-3  
             = submit_tag "Search", class: "btn btn-default"     
+      - if session[:cart_id] && !admin_signed_in?
+        = link_to cart_path(session[:cart_id]) do
+          .cart
+            = image_tag "http://simpleicon.com/wp-content/uploads/Shopping-Cart-10.png", size: "30x30"
+            Total: 
+            = Cart.find(session[:cart_id]).total_price
     .container       
       .col-sm-10.content
         .breadcrumb
@@ -53,3 +59,7 @@
         .modal-content
           .modal-body
             = render "devise/sessions/new"            
+  .footer
+    Oleg Makarenko 
+    %br
+    2015

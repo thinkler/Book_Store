@@ -1,23 +1,22 @@
-.col-md-10.carts
-  %table.table.table-hover
-    %tr
-      %th Id
-      %th User name
-      %th Phone
-      %th Adress
-      %th Status
-      %th Options
-      - @carts.each do |c|
-        = link_to cart_path(c) do
-          %tr
-            %td= c.id
-            %td= c.name
-            %td= c.phone
-            %td= c.adress
-            %td= c.status
-            %td
-              = bootstrap_form_for c do |cart|
-                = cart.select :status, options_for_select(["Confirmed", "Canceled"])
-                = cart.submit "Update status"
-              = link_to "Delete", cart_path(c), method: :delete, class: "btn btn-default", data: { confirm: "Are u sure?" }
-              = link_to "Details", cart_path(c), class: "btn btn-default"
+%table.table.table-hover
+  %tr
+    %th Id
+    %th User name
+    %th Phone
+    %th Adress
+    %th Status
+    %th Options
+    - @carts.each do |c|
+      = link_to cart_path(c) do
+        %tr
+          %td= c.id
+          %td= c.name
+          %td= c.phone
+          %td= c.adress
+          %td= c.status
+          %td
+            = bootstrap_form_for c do |cart|
+              = cart.select :status, options_for_select(["Confirmed", "Canceled"])
+              = cart.submit "Update status"
+            = link_to "Delete", cart_path(c), method: :delete, class: "btn btn-default", data: { confirm: "Are u sure?" }
+            = link_to "Details", cart_path(c), class: "btn btn-default"
