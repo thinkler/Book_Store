@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :admins
+  devise_for :admins, :controllers => {:registrations => "registrations"}
+  resources :admins, except: [:sign_up]
+
   resources :categories do
     resources :books
   end
