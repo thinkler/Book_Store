@@ -16,11 +16,14 @@ doloribus asperiores repellat."
 Category.create title: "Category1"
 Category.create title: "Category2"
 
-for i in 1..5 do 
+price = 10.0
+
+for i in 1..20 do 
   category_num = rand(2) + 1
-  Book.create title: "Book#{i}", price: 20.0, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: category_num, book_img: File.new("app/assets/images/Poster.jpg")
+  Book.create title: "Book#{i}", price: price, count: 40, year: 1995, isnb: 1111111111111, about: ABOUT, category_id: category_num, book_img: File.open("app/assets/images/Poster.jpg")
+  price += 10.0
 end
 
 for i in 1..5 do 
-  Author.create name: "Author#{i}", about: ABOUT, photo: File.new("app/assets/images/Author.jpg")
+  Author.create name: "Author#{i}", about: ABOUT, photo: File.open("app/assets/images/Author.jpg")
 end

@@ -15,7 +15,7 @@ class Book < ActiveRecord::Base
   has_and_belongs_to_many :authors
   belongs_to :category
 
-  has_attached_file :book_img, styles: { large: "600x600>", medium: "300x300", thumb: "150x150#" }
+  has_attached_file :book_img, styles: { large: "600x600>", medium: "300x300", thumb: "150x150#"}
   validates_attachment_content_type :book_img, :content_type => /\Aimage\/.*\Z/
 
   before_save :generate_short_about

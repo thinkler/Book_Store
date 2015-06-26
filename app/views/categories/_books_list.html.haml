@@ -1,15 +1,15 @@
-
 - unless books.empty?
-  Sort:
-  = sort_link(@q, :price)
-  |
-  = sort_link(@q, :created_at)
-  |
-  = sort_link(@q, :rating)
-  = will_paginate books
+  .sort-field
+    Sort:
+    = sort_link(@q, :price)
+    |
+    = sort_link(@q, :created_at)
+    |
+    = sort_link(@q, :rating)
+
   - books.each do |b|
-    .book-index.container.col-md-12
-      .book-title
+    .book-index.col-sm-12
+      .title-index
         =link_to "#{b.title}", category_book_path(b.category, b)  
       - if admin_signed_in?
         .btn-group.config-btns
@@ -17,25 +17,27 @@
           = link_to "Edit", edit_category_book_path(b.category, b), class: "btn btn-info"    
       .authors
         - b.authors.each do |a|
-          = a.name
-          ,
+          = link_to "#{a.name}", author_path(a)
         .year
           Publication year:
           = b.year
-      .image
+      .col-sm-3
         = image_tag b.book_img.url(:medium)
-      .about  
+      .col-sm-9
         %p= b.short_about
-      %h3
-        Price:
-        = b.price 
-      .buy-btn  
-        - unless admin_signed_in?
-          - if b.count > 0
-            = form_for order_book do |f| 
-              .input-group
-                = f.hidden_field :quantity, value: 1
-                = f.hidden_field :book_id, value: b.id 
-                = f.submit "Add to Cart", class: "btn btn-primary" 
+        %h3
+          Price:
+          = b.price 
+        .buy-btn  
+          - unless admin_signed_in?
+            - if b.count > 0
+              = form_for order_book do |f| 
+                .input-group
+                  = f.hidden_field :quantity, value: 1
+                  = f.hidden_field :book_id, value: b.id 
+                  = f.submit "Add to Cart", class: "btn btn-primary" 
+
 - else
   %h3 Here are no books  
+.container.center.pagination
+  = will_paginate books, renderer: BootstrapPagination::Rails           

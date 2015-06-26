@@ -7,55 +7,49 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    .head.col-sm-12
+    .container.head.col-sm-12
       .col-sm-4
         #logo
           =link_to "Book store", root_path
       .search
         = form_tag search_path, method: :get do 
           .col-sm-3
-            = text_field_tag :title, "", class: "form-control input-lg col-sm-4", witdth: 20
+            = text_field_tag :title, "", class: "form-control col-sm-4", witdth: 20
           .col-sm-3  
-            = submit_tag "Search", class: "btn btn-default btn-lg"     
-    .col-sm-2.menu
-      .static-labels
-        - if admin_signed_in?
-          %h2=link_to "Carts", carts_path
-          %h2=link_to "Authors", authors_path
-        %h2 
-          Categories:
-        - if admin_signed_in?
-          = link_to "New +", new_category_path, class: "btn btn-default"
-      - @categories = Category.all
-      - @categories.each do |cat|
+            = submit_tag "Search", class: "btn btn-default"     
+    .container       
+      .col-sm-10.content
+        .breadcrumb
+          = render_breadcrumbs :separator => ' / '
+        = yield
+      .col-sm-2.menu
+        .static-labels
+          - if admin_signed_in?
+            %h2=link_to "Carts", carts_path
+            %h2=link_to "Authors", authors_path
+          %h2 
+            Categories:
+          - if admin_signed_in?
+            = link_to "New +", new_category_path, class: "btn btn-default btm-sm btn-xs"
+        - @categories = Category.all
         %ul
-          %li
-            %h3
-              = link_to "#{cat.title}", cat
-              %br
-              - if admin_signed_in?
-                .btn-group
-                  = link_to "x", category_path(cat), method: :delete, class: "btn btn-danger", data: { confirm: "Are u sure?" }
-                  = link_to "Edit", edit_category_path(cat), class: "btn btn-info"  
-      %br
-      - if admin_signed_in?
-        = link_to "Log out", destroy_admin_session_path, method: :delete, class: "btn btn-default btn-default"
-      - else
-        %button.btn.btn-default.btn-lg{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
-          Log in
-
-    .alert
-      .alert-success
-        = flash[:success]
-      .alert-danger
-        = flash[:error]          
-    .col-sm-9.col-sm-offset-2.content     
-      .breadcrumb
-        = render_breadcrumbs :separator => ' / '
-      = yield
-      #myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-        .modal-dialog.modal-md{:role => "document"}
-          .modal-content
-            .modal-body
-              = render "devise/sessions/new"
-       
+          - @categories.each do |cat|
+            %li.cat-select
+              %h3
+                = link_to "#{cat.title}", cat
+                %br
+                - if admin_signed_in?
+                  .btn-group.btn-group-xs
+                    = link_to "x", category_path(cat), method: :delete, class: "btn btn-default", data: { confirm: "Are u sure?" }
+                    = link_to "Edit", edit_category_path(cat), class: "btn btn-default"  
+        %br
+        - if admin_signed_in?
+          = link_to "Log out", destroy_admin_session_path, method: :delete, class: "btn btn-default btn-xs"
+        - else
+          %button.btn.btn-default.btn-xs{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+            Log in
+    #myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog.modal-md{:role => "document"}
+        .modal-content
+          .modal-body
+            = render "devise/sessions/new"            

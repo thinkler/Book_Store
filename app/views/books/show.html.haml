@@ -1,40 +1,36 @@
-.book.book-index
-  .container.col-md-8
-    %h1= @book.title
-    .image
-      = image_tag @book.book_img.url(:medium)
-    .info
-      %b Year:
-      = @book.year
-      %br
-      %b Count:
-      = @book.count
-      %br
-      %b ISBN:
-      = @book.isnb    
-      %br
-      %b Authors:
-      - if admin_signed_in?
-        = form_tag author_search_list_path, :method => "get" do
-          = text_field_tag :author_name
-          = hidden_field_tag :book_id, @book.id
-          = submit_tag "Add", class: "btn btn-primary"
-      - @authors.each do |a|
-        = link_to "#{a.name}", author_path(a.id)    
-      %h3
-        Price:
-        = @book.price 
-      .buy-btn  
-        - unless admin_signed_in?
-          - if @book.count > 0
-            = form_for @order_book do |f| 
-              .input-group
-                = f.hidden_field :quantity, value: 1
-                = f.hidden_field :book_id, value: @book.id 
-                = f.submit "Add to Cart", class: "btn btn-primary" 
-            
-           
-  .container.col-md-8
-    .about
-      %h3 Description
-      %p= @book.about    
+.book
+  %h1= @book.title
+  .image.col-sm-4
+    = image_tag @book.book_img.url(:medium)
+  .info.col-sm-4
+    %b Year:
+    = @book.year
+    %br
+    %b Count:
+    = @book.count
+    %br
+    %b ISBN:
+    = @book.isnb    
+    %br
+    %b Authors:
+    - if admin_signed_in?
+      = form_tag author_search_list_path, :method => "get" do
+        = text_field_tag :author_name
+        = hidden_field_tag :book_id, @book.id
+        = submit_tag "Add", class: "btn btn-primary"
+    - @authors.each do |a|
+      = link_to "#{a.name}", author_path(a.id)    
+    %h3
+      Price:
+      = @book.price 
+    .buy-btn  
+      - unless admin_signed_in?
+        - if @book.count > 0
+          = form_for @order_book do |f| 
+            .input-group
+              = f.hidden_field :quantity, value: 1
+              = f.hidden_field :book_id, value: @book.id 
+              = f.submit "Add to Cart", class: "btn btn-primary btn-lg" 
+  .about.col-sm-4
+    %h4.center Description
+    %p= @book.about    
