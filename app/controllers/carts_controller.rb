@@ -29,7 +29,6 @@ class CartsController < ApplicationController
   def update
     unless params[:cart][:status]
       @cart = current_cart
-
       if @cart.update(cart_params)
         @cart.order_books.each do |ob|
           ob.book.plus_rating

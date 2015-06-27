@@ -22,4 +22,5 @@ $(document).ready(function(){
       $(this).remove();
     });
   }, 3000);
+
 });

@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   delete 'authors/delete_book/:id' => 'authors#delete_book', as: :delete_book
   delete 'books/delete_author/:id' => 'books#delete_author', as: :delete_author
 
+  get 'test' => 'static_pages#test'
+
 end

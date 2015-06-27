@@ -17,6 +17,21 @@
  @import "bootstrap";
  @import url(http://fonts.googleapis.com/css?family=Raleway:400|Ropa+Sans|Bree+Serif);
 
+
+
+.table tbody tr {
+  &.confirmed {
+    background-color: rgba(0, 255, 0, 0.46) !important;
+  }
+  &.canceled {
+    background-color: rgba(249, 120, 120, 0.52) !important;
+  }
+  &:hover {
+    background-color: whitesmoke !important;
+  }
+}
+
+
 .notice {
   position: fixed;
   z-index: 99;
