@@ -29,20 +29,25 @@ class CartsController < ApplicationController
   def update
     unless params[:cart][:status]
       @cart = current_cart
-      @cart.update(cart_params)
-      @cart.order_books.each do |ob|
-        ob.book.plus_rating
-        count = 0
-        count = ob.book.count.to_i - ob.quantity.to_i
-        ob.book.update(count: count)
+
+      if @cart.update(cart_params)
+        @cart.order_books.each do |ob|
+          ob.book.plus_rating
+          count = 0
+          count = ob.book.count.to_i - ob.quantity.to_i
+          ob.book.update(count: count)
+        end
+        flash[:notice] = "Order sended"
+        redirect_to root_path
+        session.clear
+      else
+        flash[:alert] = "Complete all fields"
+        render 'edit'
       end
-      flash[:success] = "Order sended"
-      redirect_to root_path
-      session.clear
     else
       @cart = Cart.find(params[:id])  
-      @cart.update(cart_params)
-      flash[:success] = "Updated"
+      @cart.update_attribute('status', cart_params[:status])
+      flash[:notice] = "Updated"
       redirect_to carts_path
     end
   end
@@ -50,7 +55,7 @@ class CartsController < ApplicationController
   def destroy
     @cart = Cart.find(params[:id])
     @cart.destroy
-    flash[:success] = "Deleted"
+    flash[:notice] = "Deleted"
     redirect_to carts_path
   end
 

@@ -18,7 +18,7 @@ class OrderBooksController < ApplicationController
       @order_book.update(quantity: params[:quantity])
       @order_book.save
     else
-      flash[:error] = "Too many"
+      flash[:alert] = "Too many books"
     end
     redirect_to cart_path(@cart)
   end

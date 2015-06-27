@@ -17,6 +17,30 @@
  @import "bootstrap";
  @import url(http://fonts.googleapis.com/css?family=Raleway:400|Ropa+Sans|Bree+Serif);
 
+.notice {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  background: rgba(100, 219, 208, 0.9);
+}
+
+.alert {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  background: rgba(252, 52, 97, 0.9);
+}
+
 .center {
   text-align: center;
 }

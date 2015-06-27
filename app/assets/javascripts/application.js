@@ -16,3 +16,10 @@
 //= require jquery
 //= require bootstrap-sprockets
 
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#alert').children().fadeOut(2000, function(){
+      $(this).remove();
+    });
+  }, 3000);
+});

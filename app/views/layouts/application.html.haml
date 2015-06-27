@@ -7,6 +7,13 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    #alert
+      - if notice
+        %p.notice 
+          = notice 
+      - elsif alert
+        %p.alert 
+          = alert
     .container.head.col-sm-12
       .col-sm-4
         #logo
@@ -53,7 +60,7 @@
           = link_to "Log out", destroy_admin_session_path, method: :delete, class: "btn btn-default btn-xs"
         - else
           %button.btn.btn-default.btn-xs{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
-            Log in
+            Admin mode
     #myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
       .modal-dialog.modal-md{:role => "document"}
         .modal-content
